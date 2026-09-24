@@ -17,3 +17,10 @@ class Rental:
         return (f"Wypożyczenie dla {self.member.name}: {item_names} -> "
                 f"kaucja {self.total_deposit:.2f} zł")
 
+    
+    def calculate_late_fee(self, days_late):
+        if self.member.is_student and len(self.items) <= 1:
+            return days_late * 3
+        elif self.member.is_premium:
+            return days_late * 2
+        return days_late * 5
